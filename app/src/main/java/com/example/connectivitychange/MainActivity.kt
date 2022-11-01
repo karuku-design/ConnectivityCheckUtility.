@@ -14,8 +14,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val receiver = connectivityReceiver()
-
-        //how to get var from another class???!!
         val networkStatus: String? = receiver.status
 
         Toast.makeText(applicationContext, networkStatus, Toast.LENGTH_LONG).show()
