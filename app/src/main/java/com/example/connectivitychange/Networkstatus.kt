@@ -11,6 +11,7 @@ class Networkstatus {
     var TYPE_MOBILE = 2
 
     fun getConnectivityStatus(context: Context?): Int {
+
         val cm = context?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val activeNetwork = cm.activeNetworkInfo
         if (null != activeNetwork) {
