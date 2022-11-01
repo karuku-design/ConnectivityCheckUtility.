@@ -1,18 +1,36 @@
 package com.example.connectivitychange
 
-import android.content.Intent
 import android.content.IntentFilter
-import androidx.appcompat.app.AppCompatActivity
+import android.net.wifi.WifiManager
 import android.os.Bundle
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+
 
 class MainActivity : AppCompatActivity() {
-
-    lateinit var connReceiver: connectivityReceiver
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val receiver = connectivityReceiver()
 
+        //how to get var from another class???!!
+        val networkStatus: String? = receiver.status
+
+        Toast.makeText(applicationContext, networkStatus, Toast.LENGTH_LONG).show()
+        val filter = IntentFilter(WifiManager.SUPPLICANT_STATE_CHANGED_ACTION)
+        this.registerReceiver(connectivityReceiver(), filter)
+
+    }
+    override fun onResume() {
+        super.onResume()
+        val filter = IntentFilter(WifiManager.SUPPLICANT_STATE_CHANGED_ACTION)
+        this.registerReceiver(connectivityReceiver(), filter)
+    }
+
+    override fun onPause() {
+        unregisterReceiver(connectivityReceiver())
+        super.onPause()
     }
 }
