@@ -16,9 +16,10 @@ class MainActivity : AppCompatActivity() {
         val receiver = connectivityReceiver()
         val networkStatus: String? = receiver.status
 
-        Toast.makeText(applicationContext, networkStatus, Toast.LENGTH_LONG).show()
         val filter = IntentFilter(WifiManager.SUPPLICANT_STATE_CHANGED_ACTION)
         this.registerReceiver(connectivityReceiver(), filter)
+        Toast.makeText(applicationContext, networkStatus, Toast.LENGTH_LONG).show()
+
 
     }
     override fun onResume() {
